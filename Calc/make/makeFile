@@ -1,0 +1,23 @@
+CC = gcc
+CFLAGS = -Wall -g -Werror  -o
+LDFLAGS = -c
+
+SRC = ./src
+OBJ = ./obj
+INC = ./include
+BIN = ./bin
+
+IFLAGS = -I $(INC)
+
+$(BIN)/calc: $(OBJ)/main.o $(OBJ)/myfunctions.o
+	$(CC) $(CFLAGS) $(BIN)/calc $(OBJ)/main.o $(OBJ)/myfunctions.o
+$(OBJ)/main.o: $(SRC)/main.c
+	$(CC) $(LDFLAGS) $(SRC)/main.c $(IFLAGS)
+$(OBJ)/myfunctions.o: $(SRC)/myfunctions.c
+	$(CC) $(LDFLAGS) $(SRC)/myfunctions.c $(IFLAGS)
+	mv *.o $(OBJ)
+
+clean:
+	rm $(OBJ)/*.o
+	rm $(BIN)/calc
+	echo "Successfully Deleted!"
